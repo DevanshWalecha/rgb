@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { rgbCase } from "../lib/rgb-text";
 
 // Drop your image URL in here once you have it.
 const heroObjectImage = "";
@@ -28,35 +29,23 @@ export default function AboutUs() {
         >
           <motion.h2
             variants={itemVariants}
-            className="mb-8 text-4xl font-extrabold uppercase leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
+            className="mb-8 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
           >
-            Why the hell!
+            {rgbCase("Why the hell!")}
             <br />
-            We are building this
+            {rgbCase("We are building this")}
           </motion.h2>
 
           <motion.p variants={itemVariants} className="mb-6 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
-            Somewhere, a factory is making its ten-millionth identical phone
-            stand. Somewhere else, someone just bought it because it was
-            cheap and &ldquo;fine.&rdquo; We have a problem with
-            &ldquo;fine.&rdquo;
+            {rgbCase("Somewhere, a factory is making its ten-millionth identical phone stand. Somewhere else, someone just bought it because it was cheap and \"fine.\" We have a problem with \"fine.\"")}
           </motion.p>
 
           <motion.p variants={itemVariants} className="mb-6 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
-            Kindred is a design-first accessories brand, which is a fancy way
-            of saying we obsess over things most brands don&rsquo;t bother
-            with — how it sits on your desk, how it ages, whether
-            you&rsquo;ll still like it in three years or quietly hate
-            yourself for buying it. We&rsquo;re not chasing catalog size.
-            We&rsquo;re building five things well, and we&rsquo;d rather ship
-            nothing than ship something forgettable.
+            {rgbCase("Kindred is a design-first accessories brand, which is a fancy way of saying we obsess over things most brands don't bother with — how it sits on your desk, how it ages, whether you'll still like it in three years or quietly hate yourself for buying it. We're not chasing catalog size. We're building five things well, and we'd rather ship nothing than ship something forgettable.")}
           </motion.p>
 
           <motion.p variants={itemVariants} className="max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
-            This waitlist is chapter one. No influencer unboxings, no fake
-            scarcity countdown timers — just five objects, coming soon, made
-            by people who think &ldquo;good enough&rdquo; is a personal
-            insult.
+            {rgbCase("This waitlist is chapter one. No influencer unboxings, no fake scarcity countdown timers — just five objects, coming soon, made by people who think \"good enough\" is a personal insult.")}
           </motion.p>
         </motion.div>
 
@@ -76,8 +65,8 @@ export default function AboutUs() {
               className="h-full w-full object-cover"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-widest text-white/30">
-              Image — 476 × 476
+            <div className="flex h-full w-full items-center justify-center text-xs tracking-widest text-white/30">
+              {rgbCase("Image — 476 × 476")}
             </div>
           )}
         </motion.div>

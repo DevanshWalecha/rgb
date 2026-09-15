@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { rgbCase } from "../lib/rgb-text";
 
 const columns = [
   {
@@ -39,7 +40,7 @@ export default function Footer() {
         aria-hidden="true"
         className="pointer-events-none select-none whitespace-nowrap pl-6 pt-4 text-[140px] font-bold leading-none tracking-tight text-white/5 sm:pl-10 sm:text-[200px] lg:pl-16 lg:text-[260px]"
       >
-        aaRGeeBee
+        {rgbCase("aaRGeeBee")}
       </motion.p>
 
       {/* Tagline + link columns */}
@@ -51,13 +52,13 @@ export default function Footer() {
         className="grid grid-cols-1 gap-10 px-6 pb-16 pt-8 sm:px-10 md:grid-cols-4 md:gap-8 lg:px-16"
       >
         <motion.p variants={columnVariants} className="text-sm text-white/60 md:col-span-1">
-          3D printed objects, designed for everyday life.
+          {rgbCase("3D printed objects, designed for everyday life.")}
         </motion.p>
 
         {columns.map((column) => (
           <motion.div key={column.heading} variants={columnVariants}>
             <p className="mb-4 text-xs font-medium tracking-[0.15em] text-white/40">
-              {column.heading.toUpperCase()}
+              {rgbCase(column.heading)}
             </p>
             <ul className="flex flex-col gap-3">
               {column.links.map((link) => (
@@ -66,7 +67,7 @@ export default function Footer() {
                     href="#"
                     className="text-sm text-white/70 transition-colors hover:text-white"
                   >
-                    {link}
+                    {rgbCase(link)}
                   </a>
                 </li>
               ))}
@@ -83,8 +84,8 @@ export default function Footer() {
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
         className="flex flex-col gap-2 border-t border-white/10 px-6 py-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-16"
       >
-        <p>© 2026 aaRGeeBee.</p>
-        <p>As the tech.</p>
+        <p>{rgbCase("© 2026 aaRGeeBee.")}</p>
+        <p>{rgbCase("As the tech.")}</p>
       </motion.div>
     </footer>
   );

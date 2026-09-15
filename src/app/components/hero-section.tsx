@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { TextScramble } from "../lib/effects/text-scramble"; // adjust to wherever your TextScramble component actually lives
 import { Spotlight } from "../lib/effects/spotlight";
+import { rgbCase } from "../lib/rgb-text";
 
 function ArrowUpRightIcon({ className = "" }: { className?: string }) {
   return (
@@ -65,7 +66,7 @@ export default function Hero() {
         className="w-full max-w-3xl px-6 pb-16 sm:px-10 sm:pb-20 lg:px-16 lg:pb-24"
       >
         <motion.p variants={itemVariants} className="mb-4 text-sm text-white/60">
-          Coming Soon
+          {rgbCase("Coming Soon")}
         </motion.p>
 
         <TextScramble
@@ -73,21 +74,19 @@ export default function Hero() {
           duration={1.1}
           speed={0.035}
           trigger
-          className="mb-6 text-4xl font-extrabold uppercase leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
+          className="mb-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
         >
-          Your accessories are boring. We fixed that.
+          {rgbCase("Your accessories are boring. We fixed that.")}
         </TextScramble>
 
         <motion.p
           variants={itemVariants}
           className="mb-8 max-w-xl text-base text-white/60 sm:text-lg"
         >
-          Kindred makes everyday tech and lifestyle accessories designed with the
-          same care as the things you already love. Join the waitlist for early
-          access.
+          {rgbCase("Kindred makes everyday tech and lifestyle accessories designed with the same care as the things you already love. Join the waitlist for early access.")}
         </motion.p>
 
         <motion.form
@@ -107,14 +106,13 @@ export default function Hero() {
             type="submit"
             className="rounded-xl bg-white px-8 py-4 font-medium text-neutral-950 transition-colors hover:bg-white/90"
           >
-            Join Waitlist
+            {rgbCase("Join Waitlist")}
           </button>
         </motion.form>
 
         <motion.p variants={itemVariants} className="mt-4 text-xs text-white/40">
-          No spam. One email when we launch. We&apos;re too busy making stuff to
-          email you about &quot;our journey.&quot;
-        </motion.p>
+  {rgbCase("No spam. One email when we launch. We're too busy making stuff to email you about \"our journey.\"")}
+</motion.p>
       </motion.div>
     </section>
   );

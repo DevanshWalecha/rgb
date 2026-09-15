@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { rgbCase } from "../lib/rgb-text";
 
 type Product = {
   title: string;
@@ -75,9 +76,9 @@ export default function WhatsComing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-4xl font-bold uppercase tracking-tight text-white sm:text-5xl"
+          className="text-4xl font-bold tracking-tight text-white sm:text-5xl"
         >
-          What&apos;s Coming.
+          {rgbCase("What's Coming.")}
         </motion.h2>
 
         <motion.a
@@ -88,7 +89,7 @@ export default function WhatsComing() {
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
           className="flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-6 py-3 text-xs font-medium tracking-[0.1em] text-white transition-colors hover:bg-neutral-800"
         >
-          SHOP ALL
+          {rgbCase("SHOP ALL")}
           <ArrowUpRightIcon className="h-3.5 w-3.5" />
         </motion.a>
       </div>
@@ -106,11 +107,11 @@ export default function WhatsComing() {
             key={tab}
             type="button"
             onClick={() => setActiveTab(tab)}
-            className={`relative pb-4 text-sm font-medium uppercase tracking-[0.08em] transition-colors ${
+            className={`relative pb-4 text-sm font-medium tracking-[0.08em] transition-colors ${
               activeTab === tab ? "text-white" : "text-white/40 hover:text-white/70"
             }`}
           >
-            {tab}
+            {rgbCase(tab)}
             {activeTab === tab && (
               <motion.span
                 layoutId="whats-coming-tab-underline"
@@ -129,8 +130,8 @@ export default function WhatsComing() {
         viewport={{ once: true, amount: 0.2 }}
         className="grid grid-cols-1 gap-6 md:grid-cols-3"
       >
-        {products.map((product) => (
-          <motion.article key={product.title} variants={cardVariants} className="flex flex-col">
+        {products.map((product, index) => (
+          <motion.article key={`${product.title}-${index}`} variants={cardVariants} className="flex flex-col">
             {/* Image slot — drop product.image URLs into the array above */}
             <div className="aspect-[4/5] w-full overflow-hidden bg-neutral-900">
               {product.image ? (
@@ -141,24 +142,24 @@ export default function WhatsComing() {
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-widest text-white/30">
+                <div className="flex h-full w-full items-center justify-center text-xs tracking-widest text-white/30">
                   Image
                 </div>
               )}
             </div>
 
             <div className="flex min-h-[92px] items-start justify-between gap-4 bg-neutral-900 px-5 py-4">
-              <p className="text-sm font-semibold uppercase leading-snug text-white">
-                {product.title}
+              <p className="text-sm font-semibold leading-snug text-white">
+                {rgbCase(product.title)}
               </p>
-              <p className="shrink-0 text-sm font-semibold text-white">{product.price}</p>
+              <p className="shrink-0 text-sm font-semibold text-white">{rgbCase(product.price)}</p>
             </div>
 
             <a
               href={product.href}
-              className="border-t border-white/5 bg-neutral-800 px-5 py-3 text-center text-xs font-medium uppercase tracking-[0.1em] text-white transition-colors hover:bg-neutral-700"
+              className="border-t border-white/5 bg-neutral-800 px-5 py-3 text-center text-xs font-medium tracking-[0.1em] text-white transition-colors hover:bg-neutral-700"
             >
-              View Object
+              {rgbCase("View Object")}
             </a>
           </motion.article>
         ))}

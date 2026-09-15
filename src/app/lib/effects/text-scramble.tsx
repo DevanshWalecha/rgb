@@ -125,9 +125,14 @@ export function TextScramble({
   const MotionComponent = getMotionComponent(Component) as MotionTextComponent;
   const [frame, setFrame] = useState<ScrambleFrame | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const text = children;
   const shouldTriggerOnMount = trigger && !triggerOnHover;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const clearAnimationInterval = () => {
     if (intervalRef.current) {
@@ -187,12 +192,12 @@ export function TextScramble({
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: re-run only when mount trigger changes
   useEffect(() => {
-    if (!shouldTriggerOnMount || prefersReducedMotion) {
+    if (!isMounted || !shouldTriggerOnMount || prefersReducedMotion) {
       return;
     }
 
     scramble();
-  }, [shouldTriggerOnMount, trigger]);
+  }, [isMounted, shouldTriggerOnMount, trigger, prefersReducedMotion]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: re-run when mount trigger changes
   useEffect(() => {
@@ -233,7 +238,7 @@ export function TextScramble({
     ));
   };
 
-  if (prefersReducedMotion) {
+  if (!isMounted || prefersReducedMotion) {
     return (
       <MotionComponent
         className={className}

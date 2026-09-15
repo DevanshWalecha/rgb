@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { rgbCase } from "../lib/rgb-text";
 
 const navLinks = [
   { label: "Shop", href: "#shop" },
@@ -11,9 +12,7 @@ const navLinks = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Pixel-art icon set (Streamline "pixel" style)                      */
-/*  Bitmap grids rendered as crisp, non-anti-aliased squares — swap    */
-/*  for licensed Streamline Pixel SVGs directly if you have that pack. */
+/*  Pixel-art icon set                                               */
 /* ------------------------------------------------------------------ */
 
 type Bitmap = number[][];
@@ -102,23 +101,6 @@ function PixelMenuIcon({ open, className = "" }: { open: boolean; className?: st
   );
 }
 
-function LogoMark() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 20 20" shapeRendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="7" height="7" fill="#EF4444" />
-      <rect x="11" y="2" width="7" height="7" fill="#FACC15" />
-      <rect x="2" y="11" width="7" height="7" fill="#3B82F6" />
-      <rect x="11" y="11" width="7" height="7" fill="#22C55E" />
-    </svg>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Navbar — one piece, full width with side margins, warm-tinted      */
-/*  glass so the red hero behind it shows through blurred rather than  */
-/*  reading as a plain dark/black bar.                                 */
-/* ------------------------------------------------------------------ */
-
 const containerVariants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
@@ -133,59 +115,84 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky w-full top-0 z-50 px-4 pt-1 sm:px-6 md:px-8">
+    <header className="sticky top-0 z-50 w-full">
+      {/* Deep Glassmorphism Bar */}
       <motion.nav
         variants={containerVariants}
         initial="hidden"
         animate="show"
-        className="mx-auto flex w-full items-center justify-between gap-6 rounded-2xl border border-white/10 px-6 py-4 backdrop-blur-xl md:px-8"
-        style={{
-          backgroundColor: "rgba(255, 51, 51, 0.38)",
-          backgroundImage:
-            "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%)",
-          boxShadow: "0 8px 32px rgba(180, 20, 20, 0.25)",
-        }}
+       className="flex h-16 w-full items-center justify-between gap-6 border-b border-white/10 bg-black/40 px-6 backdrop-blur-2xl md:h-20 md:px-12"
       >
         {/* Logo */}
-        <motion.a href="#top" className="flex shrink-0 items-center gap-2.5" variants={itemVariants}>
-          <LogoMark />
-          <span className="whitespace-nowrap text-sm font-semibold tracking-[0.18em] text-white">
-            AARGEEBEE
+        <motion.a href="#top" className="flex shrink-0 items-center gap-3" variants={itemVariants}>
+          <img
+            src="/aaRGeeBee.png"
+            alt="aaRGeeBee Logo"
+            className="h-7 w-auto object-contain [image-rendering:pixelated]"
+          />
+          <span 
+            className="whitespace-nowrap text-lg text-white" 
+            style={{ 
+              fontFamily: 'var(--font-pixel), "Courier New", monospace',
+              letterSpacing: "0.1em",
+              imageRendering: "pixelated",
+            }}
+          >
+            {rgbCase("aaRGeeBee")}
           </span>
         </motion.a>
 
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-8 md:flex">
+        {/* Desktop Links with Animated Underline */}
+        <ul className="hidden items-center gap-10 md:flex">
           {navLinks.map((link) => (
             <motion.li key={link.label} variants={itemVariants}>
               <a
                 href={link.href}
-                className="text-[13px] font-medium tracking-[0.08em] text-white/85 transition-colors hover:text-white"
+                className="group relative py-1 text-xs font-semibold tracking-[0.25em] text-white/80 transition-colors hover:text-white"
               >
-                {link.label}
+                {rgbCase(link.label)}
+                <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-gradient-to-r from-red-500 via-green-400 to-blue-500 transition-all duration-300 ease-out group-hover:w-full" />
               </a>
             </motion.li>
           ))}
         </ul>
 
-        {/* Icons + mobile toggle, inline in the same bar */}
-        <motion.div className="flex items-center gap-5" variants={itemVariants}>
-          <div className="hidden items-center gap-5 sm:flex">
-            <button type="button" aria-label="Wishlist" className="text-white/90 transition-colors hover:text-white">
+        {/* Pill-shaped Icon Buttons + Glowing Badge */}
+        <motion.div className="flex items-center gap-4" variants={itemVariants}>
+          <div className="hidden items-center gap-3 sm:flex">
+            <button
+              type="button"
+              aria-label="Wishlist"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.15)]"
+            >
               <PixelIcon bitmap={HEART_BITMAP} className="h-[18px] w-[18px]" />
             </button>
-            <button type="button" aria-label="Cart" className="text-white/90 transition-colors hover:text-white">
+
+            <button
+              type="button"
+              aria-label="Cart"
+              className="relative flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.15)]"
+            >
               <PixelIcon bitmap={CART_BITMAP} className="h-[18px] w-[18px]" />
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 text-[9px] font-bold text-white shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                2
+              </span>
             </button>
-            <button type="button" aria-label="Account" className="text-white/90 transition-colors hover:text-white">
+
+            <button
+              type="button"
+              aria-label="Account"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.15)]"
+            >
               <PixelIcon bitmap={USER_BITMAP} className="h-[18px] w-[18px]" />
             </button>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="flex h-8 w-8 items-center justify-center text-white md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:bg-white/10 md:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileOpen}
           >
@@ -194,7 +201,7 @@ export default function Navbar() {
         </motion.div>
       </motion.nav>
 
-      {/* Mobile dropdown panel */}
+      {/* Mobile Dropdown */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -202,8 +209,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="mx-auto mt-2 w-full overflow-hidden rounded-2xl border border-white/10 backdrop-blur-xl md:hidden"
-            style={{ backgroundColor: "rgba(255, 51, 51, 0.5)" }}
+            className="w-full overflow-hidden border-b border-white/10 bg-black/60 backdrop-blur-2xl md:hidden"
           >
             <ul className="flex flex-col divide-y divide-white/10">
               {navLinks.map((link) => (
@@ -211,20 +217,35 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block px-6 py-4 text-sm font-medium tracking-[0.06em] text-white/90 hover:text-white"
+                    className="block px-6 py-4 text-xs font-semibold tracking-[0.2em] text-white/80 hover:text-white"
                   >
-                    {link.label}
+                    {rgbCase(link.label)}
                   </a>
                 </li>
               ))}
-              <li className="flex items-center gap-6 px-6 py-4 sm:hidden">
-                <button type="button" aria-label="Wishlist" className="text-white/90">
+              <li className="flex items-center gap-4 px-6 py-4 sm:hidden">
+                <button
+                  type="button"
+                  aria-label="Wishlist"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white"
+                >
                   <PixelIcon bitmap={HEART_BITMAP} className="h-[18px] w-[18px]" />
                 </button>
-                <button type="button" aria-label="Cart" className="text-white/90">
+                <button
+                  type="button"
+                  aria-label="Cart"
+                  className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white"
+                >
                   <PixelIcon bitmap={CART_BITMAP} className="h-[18px] w-[18px]" />
+                  <span className="absolute -right-0.5 -top-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-pink-500 text-[8px] font-bold text-white shadow-[0_0_8px_rgba(239,68,68,0.8)]">
+                    2
+                  </span>
                 </button>
-                <button type="button" aria-label="Account" className="text-white/90">
+                <button
+                  type="button"
+                  aria-label="Account"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white"
+                >
                   <PixelIcon bitmap={USER_BITMAP} className="h-[18px] w-[18px]" />
                 </button>
               </li>

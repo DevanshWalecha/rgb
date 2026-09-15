@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { rgbCase } from "../lib/rgb-text";
 
 type FeatureCard = {
   brand: string;
@@ -44,9 +45,9 @@ export default function WTH() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="mb-8 text-4xl font-extrabold uppercase leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
+        className="mb-8 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
       >
-        Why the hell! We are building this.
+        {rgbCase("Why the hell! We are building this.")}
       </motion.h2>
 
       <motion.div
@@ -57,14 +58,10 @@ export default function WTH() {
         className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2"
       >
         <motion.p variants={copyItemVariants} className="max-w-md text-base leading-relaxed text-white/70">
-          Most accessories are an afterthought: made fast, priced cheap,
-          forgotten quickly. We think the objects you touch every day
-          deserve better thinking behind them.
+          {rgbCase("Most accessories are an afterthought: made fast, priced cheap, forgotten quickly. We think the objects you touch every day deserve better thinking behind them.")}
         </motion.p>
         <motion.p variants={copyItemVariants} className="max-w-md text-base leading-relaxed text-white/70">
-          Most accessories are an afterthought: made fast, priced cheap,
-          forgotten quickly. We think the objects you touch every day
-          deserve better thinking behind them.
+          {rgbCase("Most accessories are an afterthought: made fast, priced cheap, forgotten quickly. We think the objects you touch every day deserve better thinking behind them.")}
         </motion.p>
       </motion.div>
 
@@ -89,7 +86,7 @@ export default function WTH() {
                 className="h-full w-full object-cover"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-widest text-white/30">
+              <div className="flex h-full w-full items-center justify-center text-xs tracking-widest text-white/30">
                 Image
               </div>
             )}
@@ -99,16 +96,16 @@ export default function WTH() {
 
             <div className="absolute bottom-6 left-6 right-6 flex flex-col items-start gap-4">
               <div className="flex items-center gap-3 text-white">
-                <span className="text-2xl font-bold uppercase tracking-tight">{card.brand}</span>
+                <span className="text-2xl font-bold tracking-tight">{rgbCase(card.brand)}</span>
                 <span className="text-2xl font-light">×</span>
-                <span className="text-2xl font-bold uppercase tracking-tight">{card.partner}</span>
+                <span className="text-2xl font-bold tracking-tight">{rgbCase(card.partner)}</span>
               </div>
 
               <a
                 href={card.href}
-                className="rounded-full border border-white/15 bg-black/40 px-6 py-3 text-xs font-medium uppercase tracking-[0.1em] text-white backdrop-blur-md transition-colors hover:bg-black/60"
+                className="rounded-full border border-white/15 bg-black/40 px-6 py-3 text-xs font-medium tracking-[0.1em] text-white backdrop-blur-md transition-colors hover:bg-black/60"
               >
-                Buy Now
+                {rgbCase("Buy Now")}
               </a>
             </div>
           </motion.div>

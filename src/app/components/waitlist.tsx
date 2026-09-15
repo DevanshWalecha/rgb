@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { joinWaitlist } from "@/app/actions/waitlist";
+import { rgbCase } from "../lib/rgb-text";
 
 const copyContainerVariants = {
   hidden: {},
@@ -62,25 +63,23 @@ export default function FinalCallToAction() {
             variants={copyItemVariants}
             className="mb-4 text-sm font-medium tracking-[0.1em] text-white/70"
           >
-            AARGEEBEE
+            {rgbCase("AARGEEBEE")}
           </motion.p>
 
           <motion.h2
             variants={copyItemVariants}
-            className="mb-6 text-4xl font-extrabold uppercase leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
+            className="mb-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
           >
-            Stop settling for
+            {rgbCase("Stop settling for")}
             <br />
-            beige. Get on the list.
+            {rgbCase("beige. Get on the list.")}
           </motion.h2>
 
           <motion.p
             variants={copyItemVariants}
             className="max-w-xl text-base leading-relaxed text-white/60 sm:text-lg"
           >
-            Kindred makes everyday tech and lifestyle accessories designed
-            with the same care as the things you already love. Join the
-            waitlist for early access.
+            {rgbCase("Kindred makes everyday tech and lifestyle accessories designed with the same care as the things you already love. Join the waitlist for early access.")}
           </motion.p>
         </motion.div>
 
@@ -118,13 +117,13 @@ export default function FinalCallToAction() {
                 disabled={isLoading}
                 className="rounded-xl bg-white px-8 py-4 font-medium text-neutral-950 transition-colors hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {isLoading ? "Joining…" : "Join Waitlist"}
+                {isLoading ? rgbCase("Joining…") : rgbCase("Join Waitlist")}
               </button>
             </form>
           )}
 
           {status === "error" && message && (
-            <p className="text-sm text-red-400">{message}</p>
+            <p className="text-sm text-red-400">{rgbCase(message)}</p>
           )}
         </motion.div>
       </div>
