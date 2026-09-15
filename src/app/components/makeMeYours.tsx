@@ -4,6 +4,7 @@ import { useEffect, useState, type ChangeEvent, type DragEvent, type FormEvent }
 import { motion } from "framer-motion";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "../lib/supabase/client"; // adjust to wherever this actually lives in your project
+import { rgbCase } from "../lib/rgb-text";
 
 const steps = [
   {
@@ -169,13 +170,12 @@ export default function CustomPrint() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
         {/* Left: copy + steps */}
         <motion.div variants={copyContainerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
-          <motion.h2 variants={copyItemVariants} className="mb-6 text-4xl font-extrabold uppercase leading-[1.05] tracking-tight text-white sm:text-5xl">
-            Make it embarrassingly yours
+          <motion.h2 variants={copyItemVariants} className="mb-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl">
+            {rgbCase("Make it embarrassingly yours")}
           </motion.h2>
 
           <motion.p variants={copyItemVariants} className="mb-12 max-w-lg text-base leading-relaxed text-white/70 sm:text-lg">
-            Got a design, a logo, or questionable meme energy? Slap it on
-            select Kindred pieces. We print it, you own the consequences.
+            {rgbCase("Got a design, a logo, or questionable meme energy? Slap it on select Kindred pieces. We print it, you own the consequences.")}
           </motion.p>
 
           <motion.ol variants={stepsContainerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="flex flex-col gap-8">
@@ -183,8 +183,8 @@ export default function CustomPrint() {
               <motion.li key={step.number} variants={stepItemVariants} className="flex gap-3">
                 <span className="shrink-0 text-lg font-semibold text-white/90">{step.number}.</span>
                 <div>
-                  <p className="mb-1 text-lg font-semibold text-white">{step.title}</p>
-                  <p className="max-w-md text-sm leading-relaxed text-white/60">{step.description}</p>
+                  <p className="mb-1 text-lg font-semibold text-white">{rgbCase(step.title)}</p>
+                  <p className="max-w-md text-sm leading-relaxed text-white/60">{rgbCase(step.description)}</p>
                 </div>
               </motion.li>
             ))}
@@ -206,8 +206,7 @@ export default function CustomPrint() {
           ) : !user ? (
             <div className="flex flex-col items-center gap-4 py-12 text-center">
               <p className="text-sm text-white/70">
-                Sign in to upload a design — this keeps every submission
-                tied to an actual account.
+                {rgbCase("Sign in to upload a design — this keeps every submission tied to an actual account.")}
               </p>
               <button
                 type="button"
@@ -215,15 +214,15 @@ export default function CustomPrint() {
                 className="flex items-center gap-3 rounded-xl bg-white px-6 py-3.5 text-sm font-medium text-neutral-950 transition-colors hover:bg-white/90"
               >
                 <GoogleIcon className="h-4 w-4" />
-                Sign in with Google
+                {rgbCase("Sign in with Google")}
               </button>
             </div>
           ) : (
             <>
               <div className="flex items-center justify-between text-xs text-white/50">
-                <span>Signed in as {user.email}</span>
+                <span>{rgbCase(`Signed in as ${user.email}`)}</span>
                 <button type="button" onClick={handleSignOut} className="underline hover:text-white/80">
-                  Sign out
+                  {rgbCase("Sign out")}
                 </button>
               </div>
 
@@ -247,7 +246,7 @@ export default function CustomPrint() {
                 >
                   <UploadIcon className="h-6 w-6 text-white" />
                   <p className="text-sm text-white/80">
-                    {file ? file.name : "Drop your masterpiece here, or click to browse"}
+                    {file ? file.name : rgbCase("Drop your masterpiece here, or click to browse")}
                   </p>
                   <input id="design-file-input" type="file" accept=".png,.svg,.pdf" onChange={handleInputChange} className="hidden" />
                 </div>
@@ -260,11 +259,11 @@ export default function CustomPrint() {
                     className="w-full appearance-none rounded-xl bg-neutral-900 px-6 py-4 pr-12 text-white/90 focus:outline-none"
                   >
                     <option value="" disabled>
-                      Select a product
+                      {rgbCase("Select a product")}
                     </option>
                     {products.map((p) => (
                       <option key={p} value={p}>
-                        {p}
+                        {rgbCase(p)}
                       </option>
                     ))}
                   </select>
@@ -276,16 +275,16 @@ export default function CustomPrint() {
                   disabled={!file || !product || status === "submitting"}
                   className="w-full rounded-xl bg-white py-4 font-semibold text-neutral-950 transition-colors hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  {status === "submitting" ? "Uploading…" : "Submit"}
+                  {status === "submitting" ? rgbCase("Uploading…") : rgbCase("Submit")}
                 </button>
 
                 {status === "success" && (
                   <p className="text-center text-sm text-emerald-400">
-                    Design submitted — we&apos;ll review it shortly.
+                    {rgbCase("Design submitted — we'll review it shortly.")}
                   </p>
                 )}
                 {status === "error" && (
-                  <p className="text-center text-sm text-red-400">{errorMessage}</p>
+                  <p className="text-center text-sm text-red-400">{errorMessage ? rgbCase(errorMessage) : null}</p>
                 )}
               </form>
             </>
