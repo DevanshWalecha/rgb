@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Navbar from "./components/navbar";
 import Hero from "./components/hero-section";
-import WhatsComing from "./lib/effects/whatsComing";
-import AboutUs from "./lib/effects/aboutUs";
-import WTH from "./lib/effects/wth";
-import MakeMeYours from "./lib/effects/makeMeYours";
+import WhatsComing from "./components/whatsComing";
+import AboutUs from "./components/aboutUs";
+import WTH from "./components/wth";
+import MakeMeYours from "./components/makeMeYours";
 import FinalCallToAction from "./components/waitlist";
 import Footer from "./components/footer";
 

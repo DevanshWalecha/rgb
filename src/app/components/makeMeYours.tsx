@@ -3,7 +3,7 @@
 import { useEffect, useState, type ChangeEvent, type DragEvent, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import type { User } from "@supabase/supabase-js";
-import { createClient } from "../supabase/client"; // adjust to wherever this actually lives in your project
+import { createClient } from "../lib/supabase/client"; // adjust to wherever this actually lives in your project
 
 const steps = [
   {
