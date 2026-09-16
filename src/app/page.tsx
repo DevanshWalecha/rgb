@@ -7,20 +7,23 @@ import WTH from "./components/wth";
 import MakeMeYours from "./components/makeMeYours";
 import FinalCallToAction from "./components/waitlist";
 import Footer from "./components/footer";
+import { WebcamPixelGridDemo } from "./lib/effects/pexelWebcam";
 
 export default function Home() {
   return (
-    <div className="dark:bg-[#ff3333]">
+    <div className="dark:bg-[#ff3333] ">
       <main className="">
         
         <Navbar></Navbar>
-        <Hero></Hero>
+        <WebcamPixelGridDemo></WebcamPixelGridDemo>
+        
         <WhatsComing></WhatsComing>
         <AboutUs></AboutUs>
         <WTH></WTH>
         <MakeMeYours></MakeMeYours>
         <FinalCallToAction></FinalCallToAction>
         <Footer></Footer>
+        
       </main>
     </div>
   );

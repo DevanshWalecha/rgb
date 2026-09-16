@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
+import { departureMono } from "./fonts";
 import "./globals.css";
 
 const pressStart2P = Press_Start_2P({
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${pressStart2P.variable} h-full antialiased`}
+      className={`${departureMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#ff3333] text-[#ff3333]">{children}</body>
     </html>

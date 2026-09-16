@@ -3,7 +3,7 @@
 :root {
   --background: #ff3333;
   --foreground: #ff3333;
-  --font-pixel: "Press Start 2P", "Courier New", monospace;
+  --font-pixel: "Press Start 2P", "departureMono","Courier New", monospace;
 }
 
 @theme inline {
